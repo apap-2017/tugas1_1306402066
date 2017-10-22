@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View Penduduk by Kelurahan</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/DataTables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" />
+        <script src="/js/jquery-3.2.1.min.js" />
+        <script src="/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js" />
+        <script src="/DataTables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"/>
+
+        <script>
+            $(document).ready(function() {
+                $('#penduduk').DataTable();
+            } );
+        </script>
+    </head>
+    <body>
+        <div th:replace="fragments/fragment :: header"></div>
+        <div th:replace="fragments/fragment :: titletext"></div>
+        <div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                        <form class="col-sm-4 form-group" th:action="@{/penduduk/cari}" method="get">
+                            <div>
+                                <label for="id_kota">Kota</label> 
+                                <select class="form-control" th:name="id_kota" th:readonly="${hasKotaSelected}" th:disabled="${hasKotaSelected}">
+                                    <option th:each="kota,iterStat: ${listKota}" th:selected="${#strings.equals(kota.id, idKota)}" th:value="${kota.id}" th:text="${kota.namaKota}">Belum Kawin</option>
+                                </select>
+                                <input type="hidden" readonly="true" th:disabled="${#bools.isFalse(hasKotaSelected)}" name="id_kota" th:value="${idKota}" />
+                            </div>
+                            <div th:hidden="${#bools.isFalse(hasKotaSelected)}">
+                                <label for="id_kecamatan">Kecamatan</label>
+                                <select class="form-control" name="id_kecamatan" th:readonly="${hasKecamatanSelected}" th:disabled="${hasKecamatanSelected}">
+                                    <option th:each="kecamatan,iterStat: ${listKecamatan}" th:selected="${#strings.equals(kecamatan.id, idKecamatan)}" th:hidden="${#bools.isFalse(hasKotaSelected)}" th:value="${kecamatan.id}" th:text="${kecamatan.namaKecamatan}">Belum Kawin</option>
+                                </select>
+                                <input type="hidden" readonly="true" th:disabled="${#bools.isFalse(hasKecamatanSelected)}" name="id_kecamatan" th:value="${idKecamatan}" />
+                            </div>
+                            <div th:hidden="${#bools.isFalse(hasKecamatanSelected)}">
+                                <label for="id_kelurahan">Kelurahan</label>
+                                <select class="form-control" name="id_kelurahan" th:readonly="${hasKelurahanSelected}" th:disabled="${hasKelurahanSelected}">
+                                    <option th:each="kelurahan,iterStat: ${listKelurahan}" th:selected="${#strings.equals(kelurahan.id, idKelurahan)}" th:hidden="${#bools.isFalse(hasKecamatanSelected)}" th:value="${kelurahan.id}" th:text="${kelurahan.namaKelurahan}">Belum Kawin</option>
+                                </select>
+                                <input type="hidden" readonly="true" th:disabled="${#bools.isFalse(hasKelurahanSelected)}" name="id_kelurahan" th:value="${idKelurahan}" />
+                            </div>
+                            <button type="submit" class="btn btn-default">Cari</button>
+                        </form>
+                    </div>
+            <div th:hidden="${#bools.isFalse(isAssignedtoKelurahan)}" th:disabled="${isAssignedtoKelurahan}">
+            <table id="penduduk" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Tempat Lahir</th>
+                        <th>Tanggal Lahir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="penduduk,iterationStatus: ${listPenduduk}">
+                        <td th:text="${iterationStatus.count}">Count</td>
+                        <td th:text="${penduduk.nik}">NPM</td>
+                        <td th:text="${penduduk.nama}">Name</td>
+                        <td th:text="${penduduk.tempatLahir}">GPA</td>
+                        <td th:text="${penduduk.tanggalLahir}">Cum Laude</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+ 
+    </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Penduduk</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div th:replace="fragments/fragment :: header"></div>
+        <div th:replace="fragments/fragment :: titletext"></div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">NIK</h3>
+            <p class="col-sm-6" th:text="${penduduk.nik}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Nama</h3>
+            <p class="col-sm-6" th:text="${penduduk.nama}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Tempat/Tanggal Lahir</h3>
+            <p class="col-sm-6" th:text="${penduduk.tempatLahir + ', ' + #dates.day(penduduk.tanggalLahir) + ' ' + #dates.monthName(penduduk.tanggalLahir) + ' ' + #dates.year(penduduk.tanggalLahir)}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Jenis Kelamin</h3>
+            <p class="col-sm-6" th:text="${penduduk.jenisKelamin==0}? 'Pria' : 'Wanita'"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Alamat</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.alamat}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">RT</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.rT}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">RW</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.rW}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Kelurahan</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.kelurahan.namaKelurahan}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Kecamatan</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.kelurahan.kecamatan.namaKecamatan}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Kota</h3>
+            <p class="col-sm-6" th:text="${penduduk.keluarga.kelurahan.kecamatan.kota.namaKota}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Kewarganegaraan</h3>
+            <p class="col-sm-6" th:text="${penduduk.isWni==0}? 'WNA' : 'WNI'"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Agama</h3>
+            <p class="col-sm-6" th:text="${penduduk.agama}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Pekerjaan</h3>
+            <p class="col-sm-6" th:text="${penduduk.pekerjaan}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Status Perkawinan</h3>
+            <p class="col-sm-6" th:text="${penduduk.statusPerkawinan}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Golongan Darah</h3>
+            <p class="col-sm-6" th:text="${penduduk.golonganDarah}"></p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <h3 class="col-sm-3">Status Kematian</h3>
+            <p class="col-sm-6" th:text="${penduduk.isWafat==0}? 'Hidup' : 'Wafat'"></p>
+        </div>
+        <form class="row form-group" th:action="'/penduduk/mati'" method="post" th:object="${penduduk}">
+        <div>
+            <input type="hidden" readonly="true" name="id" th:field="*{id}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="nik" th:field="*{nik}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="nama" th:field="*{nama}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="tempatLahir" th:field="*{tempatLahir}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="tanggalLahir" th:field="*{tanggalLahir}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="jenisKelamin" th:field="*{jenisKelamin}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="golonganDarah" th:field="*{golonganDarah}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="agama" th:field="*{agama}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="statusPerkawinan" th:field="*{statusPerkawinan}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="kewarganegaraan" th:field="*{isWni}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="idKeluarga" th:field="*{idKeluarga}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="pekerjaan" th:field="*{pekerjaan}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="statusKematian" th:field="*{isWafat}" />
+        </div>
+        <div>
+            <input type="hidden" readonly="true" name="statusDalamKeluarga" th:field="*{statusDalamKeluarga}" />
+        </div>
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-danger">Nonaktifkan</button>
+        </div>
+        </form>
+    </body>
+</html>
+

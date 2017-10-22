@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Update Penduduk Berhasil!</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div th:replace="fragments/fragment :: header"></div>
+        <div th:replace="fragments/fragment :: titletext"></div>
+        <p th:text="'Penduduk dengan NIK ' + ${nik} + ' berhasil diupdate!'"></p>
+    </body>
+</html>

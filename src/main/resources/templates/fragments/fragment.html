@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Fragment</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div th:fragment="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href = "#">SI Kependudukan</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls = "navbarSupportedContent" aria-expanded = "false"
+                aria-label = "Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/keluarga/tambah">Menambah Keluarga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/penduduk/tambah">Menambah Penduduk</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div th:fragment="titletext" th:switch="${templateName}">
+            <h2 th:case="'index'" th:text="'Selamat Datang di Sistem Informasi Kependudukan DKI Jakarta'">Index</h2>
+            <h2 th:case="'cari-penduduk'" th:text="'Mencari Penduduk berdasarkan Kota, Kecamatan, dan Kelurahan'">Index</h2>
+            <h2 th:case="'form-add-keluarga'" th:text="'Menambahkan Keluarga'">Index</h2>
+            <h2 th:case="'form-add-penduduk'" th:text="'Menambahkan Penduduk'">Index</h2>
+            <h2 th:case="'form-update-keluarga'" th:text="'Memperbarui Keluarga'">Index</h2>
+            <h2 th:case="'form-update-penduduk'" th:text="'Memperbarui Penduduk'">Index</h2>
+            <h2 th:case="'view-keluarga'" th:text="'Menampilkan Keluarga'">Index</h2>
+            <h2 th:case="'view-penduduk'" th:text="'Menampilkan Penduduk'">Index</h2>
+            <h2 th:case="'not-found-penduduk'" th:text="'Penduduk Tidak Ditemukan!'">Index</h2>
+            <h2 th:case="'not-found-keluarga'" th:text="'Keluarga Tidak Ditemukan!'">Index</h2>
+            <h2 th:case="'success-add-penduduk'" th:text="'Penduduk Selesai Didaftarkan!'">Index</h2>
+            <h2 th:case="'success-add-keluarga'" th:text="'Keluarga Selesai Didaftarkan!'">Index</h2>
+            <h2 th:case="'success-update-penduduk'" th:text="'Update Penduduk Selesai!'">Index</h2>
+            <h2 th:case="'success-update-keluarga'" th:text="'Update Keluarga Selesai!'">Index</h2>
+            <h2 th:case="'success-update-kematian'" th:text="'Berhasil Menonaktifkan Penduduk!'">Index</h2>
+        </div>
+        <div th:fragment="footer">
+            <hr/>
+            <h4>SI Kependudukan</h4>
+        </div>
+    </body>
+</html>
